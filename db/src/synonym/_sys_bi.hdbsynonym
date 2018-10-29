@@ -1,0 +1,8 @@
+{
+  "VARIABLE_ASSIGNMENT": {
+    "target": {
+      "object": "BIMC_VARIABLE_ASSIGNMENT",
+      "schema": "_SYS_BI"
+    }
+  }
+}

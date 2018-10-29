@@ -1,0 +1,24 @@
+//
+// Tables
+//
+using tables.Booking;
+
+context OpenSeats {
+
+	//
+	// View on Booking
+	//
+    view OpenSeats as
+        select from Booking
+        {
+            FLIGHT,
+            FDATE,
+            count(SEAT) as TOTAL_SEATS
+        }
+        where
+            STATUS = 'AVAILABLE'
+        group by FLIGHT, FDATE
+        having count(SEAT) > 2
+        order by FLIGHT asc, FDATE desc
+        ;
+}
