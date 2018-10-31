@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="CVAirport" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVAirport"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="tables.Airport">
+    <resourceUri>tables.Airport</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<inlineHierarchy xsi:type="Dimension:LeveledHierarchy" id="Geography" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true">
+  <descriptions defaultDescription="Geography"/>
+  <unassignedMemberProperties mode="FALSE"/>
+  <levels>
+    <level levelAttribute="COUNTRY" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="COUNTRY" sortDirection="ASC"/>
+    <level levelAttribute="CITY" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="CITY" sortDirection="ASC"/>
+    <level levelAttribute="CODE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="CODE" sortDirection="ASC"/>
+  </levels>
+</inlineHierarchy>
+<logicalModel id="tables.Airport">
+  <attributes>
+    <attribute id="CODE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CODE"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="CODE"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="NAME"/>
+    </attribute>
+    <attribute id="CITY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="CITY"/>
+    </attribute>
+    <attribute id="COUNTRY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="TIMEZONE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TIMEZONE"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="TIMEZONE"/>
+    </attribute>
+    <attribute id="LATITUDE" hidden="true" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LATITUDE"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="LATITUDE"/>
+    </attribute>
+    <attribute id="LONGITUDE" hidden="true" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LONGITUDE"/>
+      <keyMapping columnObjectName="tables.Airport" columnName="LONGITUDE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="C_POINT" hidden="true" order="8" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="VARCHAR" expressionLanguage="SQL" length="50">
+        <formula>CONCAT(CONCAT(CONCAT(CONCAT('Point(', &quot;LONGITUDE&quot;),' '),&quot;LATITUDE&quot;),')')</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+    <calculatedAttribute id="LOCATION" order="9" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="ST_GEOMETRY" expressionLanguage="COLUMN_ENGINE">
+        <formula>ST_GeomFromText(&quot;C_POINT&quot;,4326)</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

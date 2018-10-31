@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CVCompare" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVCompare"/>
+<localVariables>
+  <variable id="IP_CY" parameter="true">
+    <descriptions defaultDescription="Current Year"/>
+    <variableProperties datatype="VARCHAR" length="4" mandatory="true">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="Single"/>
+      <defaultRange lowValue="2017"/>
+    </variableProperties>
+  </variable>
+  <variable id="IP_PY" parameter="true">
+    <descriptions defaultDescription="Prior Year"/>
+    <variableProperties datatype="VARCHAR" length="4" mandatory="true">
+      <valueDomain type="empty"/>
+      <selection multiLine="false" type="Single"/>
+      <defaultRange lowValue="2017"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CVBooking">
+    <resourceUri>CVBooking</resourceUri>
+  </DataSource>
+  <DataSource id="P_PY$$$$CVBooking$$">
+    <resourceUri>CVBooking</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="P_CY" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="FLIGHT">
+        <descriptions defaultDescription="FLIGHT_1"/>
+      </viewAttribute>
+      <viewAttribute id="FDATE">
+        <descriptions defaultDescription="FDATE"/>
+      </viewAttribute>
+      <viewAttribute id="STATUS">
+        <descriptions defaultDescription="STATUS"/>
+      </viewAttribute>
+      <viewAttribute id="MONTH">
+        <descriptions defaultDescription="MONTH"/>
+      </viewAttribute>
+      <viewAttribute id="COUNT_CUSTOMER_CY">
+        <descriptions defaultDescription="Unique Customer"/>
+      </viewAttribute>
+      <viewAttribute id="TOTAL_CY">
+        <descriptions defaultDescription="TOTAL"/>
+      </viewAttribute>
+      <viewAttribute id="DISCOUNT_CY">
+        <descriptions defaultDescription="DISCOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="FEES_CY">
+        <descriptions defaultDescription="FEES"/>
+      </viewAttribute>
+      <viewAttribute id="YEAR">
+        <descriptions defaultDescription="YEAR"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="CVBooking">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT_1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNT_CUSTOMER_CY" source="CC_COUNT_CUSTOMER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_CY" source="TOTAL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT_CY" source="DISCOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FEES_CY" source="FEES"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+    </input>
+    <filter>&quot;YEAR&quot; = '$$IP_CY$$'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="P_PY" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="FLIGHT">
+        <descriptions defaultDescription="FLIGHT_1"/>
+      </viewAttribute>
+      <viewAttribute id="FDATE">
+        <descriptions defaultDescription="FDATE"/>
+      </viewAttribute>
+      <viewAttribute id="STATUS">
+        <descriptions defaultDescription="STATUS"/>
+      </viewAttribute>
+      <viewAttribute id="MONTH">
+        <descriptions defaultDescription="MONTH"/>
+      </viewAttribute>
+      <viewAttribute id="YEAR">
+        <descriptions defaultDescription="YEAR"/>
+      </viewAttribute>
+      <viewAttribute id="COUNT_CUSTOMER_PY">
+        <descriptions defaultDescription="Unique Customer"/>
+      </viewAttribute>
+      <viewAttribute id="TOTAL_PY">
+        <descriptions defaultDescription="TOTAL"/>
+      </viewAttribute>
+      <viewAttribute id="DISCOUNT_PY">
+        <descriptions defaultDescription="DISCOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="FEES_PY">
+        <descriptions defaultDescription="FEES"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="P_PY$$$$CVBooking$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT_1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNT_CUSTOMER_PY" source="CC_COUNT_CUSTOMER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_PY" source="TOTAL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT_PY" source="DISCOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FEES_PY" source="FEES"/>
+    </input>
+    <filter>&quot;YEAR&quot; = '$$IP_PY$$'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="FLIGHT">
+        <descriptions defaultDescription="FLIGHT_1"/>
+      </viewAttribute>
+      <viewAttribute id="FDATE">
+        <descriptions defaultDescription="FDATE"/>
+      </viewAttribute>
+      <viewAttribute id="STATUS">
+        <descriptions defaultDescription="STATUS"/>
+      </viewAttribute>
+      <viewAttribute id="MONTH">
+        <descriptions defaultDescription="MONTH"/>
+      </viewAttribute>
+      <viewAttribute id="COUNT_CUSTOMER_CY" aggregationType="sum">
+        <descriptions defaultDescription="Unique Customer"/>
+      </viewAttribute>
+      <viewAttribute id="TOTAL_CY" aggregationType="sum">
+        <descriptions defaultDescription="TOTAL"/>
+      </viewAttribute>
+      <viewAttribute id="DISCOUNT_CY" aggregationType="sum">
+        <descriptions defaultDescription="DISCOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="FEES_CY" aggregationType="sum">
+        <descriptions defaultDescription="FEES"/>
+      </viewAttribute>
+      <viewAttribute id="YEAR">
+        <descriptions defaultDescription="YEAR"/>
+      </viewAttribute>
+      <viewAttribute id="COUNT_CUSTOMER_PY" aggregationType="sum">
+        <descriptions defaultDescription="Unique Customer"/>
+      </viewAttribute>
+      <viewAttribute id="TOTAL_PY" aggregationType="sum">
+        <descriptions defaultDescription="TOTAL"/>
+      </viewAttribute>
+      <viewAttribute id="DISCOUNT_PY" aggregationType="sum">
+        <descriptions defaultDescription="DISCOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="FEES_PY" aggregationType="sum">
+        <descriptions defaultDescription="FEES"/>
+      </viewAttribute>
+      <viewAttribute datatype="VARCHAR" length="2" id="DATA_SOURCE">
+        <descriptions defaultDescription="DATA_SOURCE"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="P_CY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNT_CUSTOMER_CY" source="COUNT_CUSTOMER_CY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_CY" source="TOTAL_CY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT_CY" source="DISCOUNT_CY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FEES_CY" source="FEES_CY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="COUNT_CUSTOMER_PY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_PY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DISCOUNT_PY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="FEES_PY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DATA_SOURCE" null="false" value="CY"/>
+    </input>
+    <input node="P_PY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="COUNT_CUSTOMER_CY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTAL_CY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DISCOUNT_CY" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="FEES_CY" null="true" value=""/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNT_CUSTOMER_PY" source="COUNT_CUSTOMER_PY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL_PY" source="TOTAL_PY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT_PY" source="DISCOUNT_PY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FEES_PY" source="FEES_PY"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DATA_SOURCE" null="false" value="PY"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Union_1">
+  <attributes>
+    <attribute id="FLIGHT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FLIGHT_1"/>
+      <keyMapping columnObjectName="Union_1" columnName="FLIGHT"/>
+    </attribute>
+    <attribute id="FDATE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FDATE"/>
+      <keyMapping columnObjectName="Union_1" columnName="FDATE"/>
+    </attribute>
+    <attribute id="MONTH" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Union_1" columnName="MONTH"/>
+    </attribute>
+    <attribute id="YEAR" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Union_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="STATUS" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS"/>
+      <keyMapping columnObjectName="Union_1" columnName="STATUS"/>
+    </attribute>
+    <attribute id="DATA_SOURCE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATA_SOURCE"/>
+      <keyMapping columnObjectName="Union_1" columnName="DATA_SOURCE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="COUNT_CUSTOMER_CY" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Unique Customer"/>
+      <measureMapping columnObjectName="Union_1" columnName="COUNT_CUSTOMER_CY"/>
+    </measure>
+    <measure id="TOTAL_CY" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTAL"/>
+      <measureMapping columnObjectName="Union_1" columnName="TOTAL_CY"/>
+    </measure>
+    <measure id="DISCOUNT_CY" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DISCOUNT"/>
+      <measureMapping columnObjectName="Union_1" columnName="DISCOUNT_CY"/>
+    </measure>
+    <measure id="FEES_CY" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="FEES"/>
+      <measureMapping columnObjectName="Union_1" columnName="FEES_CY"/>
+    </measure>
+    <measure id="COUNT_CUSTOMER_PY" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Unique Customer"/>
+      <measureMapping columnObjectName="Union_1" columnName="COUNT_CUSTOMER_PY"/>
+    </measure>
+    <measure id="TOTAL_PY" order="12" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTAL"/>
+      <measureMapping columnObjectName="Union_1" columnName="TOTAL_PY"/>
+    </measure>
+    <measure id="DISCOUNT_PY" order="13" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DISCOUNT"/>
+      <measureMapping columnObjectName="Union_1" columnName="DISCOUNT_PY"/>
+    </measure>
+    <measure id="FEES_PY" order="14" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="FEES"/>
+      <measureMapping columnObjectName="Union_1" columnName="FEES_PY"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="P_CY" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="356.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="P_PY" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="356.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

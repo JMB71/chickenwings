@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CVCustomer" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVCustomer"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="tables.Customer">
+    <resourceUri>tables.Customer</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="tables.Customer">
+  <attributes>
+    <attribute id="CUSTID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTID"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="CUSTID"/>
+    </attribute>
+    <attribute id="FNAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FNAME"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="FNAME"/>
+    </attribute>
+    <attribute id="LNAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LNAME"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="LNAME"/>
+    </attribute>
+    <attribute id="MOBILE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MOBILE"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="MOBILE"/>
+    </attribute>
+    <attribute id="EMAIL" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMAIL"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="EMAIL"/>
+    </attribute>
+    <attribute id="COUNTRY" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="FLYERID" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FLYERID"/>
+      <keyMapping columnObjectName="tables.Customer" columnName="FLYERID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

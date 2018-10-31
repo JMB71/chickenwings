@@ -1,0 +1,14 @@
+{
+  "M_TIME_DIMENSION_SYS_BI": {
+    "target": {
+      "object": "M_TIME_DIMENSION",
+      "schema": "_SYS_BI"
+    }
+  },
+  "VARIABLE_ASSIGNMENT_SYS_BI": {
+    "target": {
+      "object": "BIMC_VARIABLE_ASSIGNMENT",
+      "schema": "_SYS_BI"
+    }
+  }
+}

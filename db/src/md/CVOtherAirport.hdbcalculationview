@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CVOtherAirport" applyPrivilegeType="NONE" dataCategory="DEFAULT" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVOtherAirport"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="CVAirport">
+    <resourceUri>CVAirport</resourceUri>
+  </DataSource>
+  <DataSource id="Projection_2$$$$CVAirport$$">
+    <resourceUri>CVAirport</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="CODE">
+        <descriptions defaultDescription="CODE"/>
+      </viewAttribute>
+      <viewAttribute id="CITY">
+        <descriptions defaultDescription="CITY"/>
+      </viewAttribute>
+      <viewAttribute id="LOCATION">
+        <descriptions defaultDescription="LOCATION"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="CVAirport">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CODE" source="CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LOCATION" source="LOCATION"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="CODE">
+        <descriptions defaultDescription="CODE"/>
+      </viewAttribute>
+      <viewAttribute id="CITY">
+        <descriptions defaultDescription="CITY"/>
+      </viewAttribute>
+      <viewAttribute id="LOCATION">
+        <descriptions defaultDescription="LOCATION"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_2$$$$CVAirport$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CODE" source="CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LOCATION" source="LOCATION"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="CODE_1">
+        <descriptions defaultDescription="CODE"/>
+      </viewAttribute>
+      <viewAttribute id="CITY_1">
+        <descriptions defaultDescription="CITY"/>
+      </viewAttribute>
+      <viewAttribute id="CODE_2">
+        <descriptions defaultDescription="CODE"/>
+      </viewAttribute>
+      <viewAttribute id="CITY_2">
+        <descriptions defaultDescription="CITY"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$LOCATION$LOCATION"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CODE_1" source="CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY_1" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$LOCATION$LOCATION" source="LOCATION"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CODE_2" source="CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY_2" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$LOCATION$LOCATION" source="LOCATION"/>
+    </input>
+    <joinAttribute name="JOIN$LOCATION$LOCATION">
+      <spatialJoinProperties predicate="WITHIN_DISTANCE" predicateEvaluatesTo="true">
+        <distance>
+          <value>100000</value>
+        </distance>
+      </spatialJoinProperties>
+    </joinAttribute>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="CODE_1" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="CODE_1"/>
+    </attribute>
+    <attribute id="CITY_1" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CITY_1"/>
+    </attribute>
+    <attribute id="CODE_2" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="CODE_2"/>
+    </attribute>
+    <attribute id="CITY_2" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CITY_2"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

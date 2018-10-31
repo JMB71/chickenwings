@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CVFlight" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVFlight"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="tables.Flight">
+    <resourceUri>tables.Flight</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="tables.Flight">
+  <attributes>
+    <attribute id="FLIGHT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FLIGHT"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="FLIGHT"/>
+    </attribute>
+    <attribute id="FDATE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FDATE"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="FDATE"/>
+    </attribute>
+    <attribute id="DEPT" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPT"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="DEPT"/>
+    </attribute>
+    <attribute id="ARRT" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ARRT"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="ARRT"/>
+    </attribute>
+    <attribute id="STATUS" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="STATUS"/>
+    </attribute>
+    <attribute id="PLANE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PLANE"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="PLANE"/>
+    </attribute>
+    <attribute id="PILOT1" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PILOT1"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="PILOT1"/>
+    </attribute>
+    <attribute id="PILOT2" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PILOT2"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="PILOT2"/>
+    </attribute>
+    <attribute id="CREW1" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CREW1"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="CREW1"/>
+    </attribute>
+    <attribute id="CREW2" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CREW2"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="CREW2"/>
+    </attribute>
+    <attribute id="CREW3" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CREW3"/>
+      <keyMapping columnObjectName="tables.Flight" columnName="CREW3"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
