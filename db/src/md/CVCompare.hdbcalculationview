@@ -2,23 +2,14 @@
 <Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CVCompare" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
 <descriptions defaultDescription="CVCompare"/>
 <localVariables>
-  <variable id="IP_CY" parameter="true">
+  <variable id="IP_YEAR" parameter="true">
     <descriptions defaultDescription="Current Year"/>
     <variableProperties datatype="VARCHAR" length="4" mandatory="true">
       <valueDomain type="empty"/>
       <selection multiLine="false" type="Single"/>
       <defaultRange lowValue="2017"/>
     </variableProperties>
-  </variable>
-  <variable id="IP_PY" parameter="true">
-    <descriptions defaultDescription="Prior Year"/>
-    <variableProperties datatype="VARCHAR" length="4" mandatory="true">
-      <valueDomain type="empty"/>
-      <selection multiLine="false" type="Single"/>
-      <defaultRange lowValue="2017"/>
-    </variableProperties>
-  </variable>
-</localVariables>
+  </variable></localVariables>
 <variableMappings/>
 <dataSources>
   <DataSource id="CVBooking">
@@ -29,7 +20,7 @@
   </DataSource>
 </dataSources>
 <calculationViews>
-  <calculationView xsi:type="Calculation:ProjectionView" id="P_CY" filterExpressionLanguage="SQL">
+  <calculationView xsi:type="Calculation:ProjectionView" id="P_CY">
     <viewAttributes>
       <viewAttribute id="FLIGHT">
         <descriptions defaultDescription="FLIGHT_1"/>
@@ -72,7 +63,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="FEES_CY" source="FEES"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
     </input>
-    <filter>&quot;YEAR&quot; = '$$IP_CY$$'</filter>
+    <filter>&quot;YEAR&quot; = '$$IP_YEAR$$'</filter>
   </calculationView>
   <calculationView xsi:type="Calculation:ProjectionView" id="P_PY" filterExpressionLanguage="SQL">
     <viewAttributes>
@@ -117,7 +108,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT_PY" source="DISCOUNT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="FEES_PY" source="FEES"/>
     </input>
-    <filter>&quot;YEAR&quot; = '$$IP_PY$$'</filter>
+    <filter>&quot;YEAR&quot; = YEAR('$$IP_YEAR$$') - 1</filter>
   </calculationView>
   <calculationView xsi:type="Calculation:UnionView" id="Union_1">
     <viewAttributes>
@@ -166,7 +157,7 @@
     </viewAttributes>
     <calculatedViewAttributes/>
     <restrictedViewAttributes/>
-    <input node="P_CY">
+    <input node="P_CY" emptyUnionBehavior="NO_ROW">
       <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
@@ -182,7 +173,7 @@
       <mapping xsi:type="Calculation:ConstantAttributeMapping" target="FEES_PY" null="true" value=""/>
       <mapping xsi:type="Calculation:ConstantAttributeMapping" target="DATA_SOURCE" null="false" value="CY"/>
     </input>
-    <input node="P_PY">
+    <input node="P_PY" emptyUnionBehavior="NO_ROW">
       <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
@@ -269,21 +260,21 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="221.11302679000914" y="112"/>
+      <upperLeftCorner x="221" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
   
     <shape expanded="true" modelObjectName="P_CY" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="92.00000000000001" y="356.9999988079071"/>
+      <upperLeftCorner x="92" y="356"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="P_PY" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="302.00000000000006" y="356.9999988079071"/>
+      <upperLeftCorner x="302" y="356"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <upperLeftCorner x="221" y="217"/>
       <rectangleSize height="30" width="160"/>
     </shape>
   </shapes>
