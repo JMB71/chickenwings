@@ -1,8 +1,0 @@
-in package ChickenWings.db.ext1;
-
-// Table
-using tables.Airport;
-
-extend entity Airport with {
-	INTERNATIONAL	: Boolean;
-}
